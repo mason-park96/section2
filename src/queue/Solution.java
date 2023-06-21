@@ -1,28 +1,74 @@
-/*
-프린터 성능 측정 문제
-
-[제한사항]
-
-인쇄 작업 목록은 칸으로 이루어져 있습니다.
-각 칸에는 한 개의 문서만 위치할 수 있습니다.
-문서는 1초에 한 칸만 이동할 수 있습니다.
-인쇄 작업 목록의 크기는 bufferSize 이고 최대 용량 capacities 만큼 문서를 담을 수 있습니다.
-*/
-
 package queue;
 
 import java.util.*;
 
 public class Solution {
-    public int queuePrinter(int bufferSize, int capacities, int[] documents) {
-        // TODO:
-        int processTime = 0;
+    private String value;   // 현재 노드 (부모 노드)
+    private ArrayList<Solution> children;   // 자식 노드. 다자트리네
 
-        // 작업 공간
-        Queue<Integer> processList = new LinkedList<>();
+    public Solution() {    //전달인자가 없을 경우의 생성자
+        this.value = null;
+        this.children = null;
+    }
 
+    public Solution(String data) {    //전달인자가 존재할 경우의 생성자
+        this.value = data;
+        this.children = null;
+    }
 
+    public void setValue(String data) {
+        this.value = data;
+    }
 
-        return processTime;
+    public String getValue() {      //현재 노드의 데이터를 반환
+        return this.value;
+    }
+
+    public void addChildNode(Solution node) {
+        if (children.isEmpty()) children = new ArrayList<>();
+        children.add(node);
+    }
+
+    public void removeChildNode(Solution node) {
+        String data = node.getValue();
+
+        if (children != null) {
+            for (int i = 0; i < children.size(); i++) {
+                if (children.get(i).getValue().equals(data)) {
+                    children.remove(i);
+                    return;
+                }
+                if (children.get(i).children != null) children.get(i).removeChildNode(node);
+            }
+        }
+    }
+
+    public ArrayList<Solution> getChildrenNode() {
+        return children;
+    }
+
+    public boolean contains(String data) {      //재귀를 사용하여 값을 검색합니다.
+        if (value.equals(data)) return true;
+
+        boolean check;
+
+        if (children != null) {
+            for (int i = 0; i < children.size(); i++) {
+                check = children.get(i).contains(data, false);
+                if (check) return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean contains(String data, boolean check) {      //재귀를 사용하여 값을 검색합니다.
+        if (value.equals(data)) return true;
+
+        if (children != null) {
+            for (int i = 0; i < children.size(); i++) {
+                check = children.get(i).contains(data, check);
+            }
+        }
+        return check;
     }
 }
