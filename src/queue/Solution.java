@@ -3,72 +3,138 @@ package queue;
 import java.util.*;
 
 public class Solution {
-    private String value;   // 현재 노드 (부모 노드)
-    private ArrayList<Solution> children;   // 자식 노드. 다자트리네
+    // 트리를 구성하는 노드 클래스입니다.
+    public static class Node {
+        private int data;
+        private Node left;
+        private Node right;
 
-    public Solution() {    //전달인자가 없을 경우의 생성자
-        this.value = null;
-        this.children = null;
+        /* 생성자 */
+        public Node(int data) {
+            this.setData(data);
+            setLeft(null);
+            setRight(null);
+        }
+
+        public int getData() {
+            return data;
+        }
+
+        public Node getLeft() {
+            return left;
+        }
+
+        public Node getRight() {
+            return right;
+        }
+
+        public void setData(int data) {
+            this.data = data;
+        }
+
+        public void setLeft(Node left) {
+            this.left = left;
+        }
+
+        public void setRight(Node right) {
+            this.right = right;
+        }
     }
 
-    public Solution(String data) {    //전달인자가 존재할 경우의 생성자
-        this.value = data;
-        this.children = null;
-    }
+    //이진 탐색 트리의 클래스입니다.
+    public static class binarySearchTree {
+        public Node root;
 
-    public void setValue(String data) {
-        this.value = data;
-    }
+        public binarySearchTree() {
+            root = null;
+        }
 
-    public String getValue() {      //현재 노드의 데이터를 반환
-        return this.value;
-    }
+        // tree에 value를 추가합니다.
+        public void insert(int data) {
+            Node newNode = new Node(data); // 왼쪽, 오른쪽 자식 노드가 null 이며 data 의 값이 저장된 새 노드 생성
+            if (root == null) {// 루트 노드가 없을때, 즉 트리가 비어있는 상태일 때,
+                root = newNode;
+                return;
+            }
+            if (root.data == data) return;   //중복일때 정지
 
-    public void addChildNode(Solution node) {
-        if (children.isEmpty()) children = new ArrayList<>();
-        children.add(node);
-    }
+            // root 노드가 비어있지 않을 경우 아래의 동작을 수행하는데
 
-    public void removeChildNode(Solution node) {
-        String data = node.getValue();
+            Node currentNode = root;    // 탐색을 위한 노드
+            Node parentNode = null;
 
-        if (children != null) {
-            for (int i = 0; i < children.size(); i++) {
-                if (children.get(i).getValue().equals(data)) {
-                    children.remove(i);
-                    return;
+            while (true) {
+                parentNode = currentNode;
+
+                if (data < currentNode.getData()) { // 해당 노드보다 작을 경우
+                    currentNode = currentNode.getLeft();
+                    if (currentNode == null) {
+                        parentNode.setLeft(currentNode);
+                        return;
+                    } else if (currentNode.data == newNode.data) return;
+                } else { // 해당 노드보다 클 경우
+                    currentNode = currentNode.getRight();
+                    if (currentNode == null) {
+                        parentNode.setRight(currentNode);
+                        return;
+                    } else if (currentNode.data == newNode.data) return;
                 }
-                if (children.get(i).children != null) children.get(i).removeChildNode(node);
             }
         }
-    }
 
-    public ArrayList<Solution> getChildrenNode() {
-        return children;
-    }
+        // tree의 value값을 탐색합니다.
+        public boolean contains(int data) {
+            Node currentNode = root;
+            while (currentNode != null) {
+                // 찾는 value값이 노드의 value와 일치한다면, true를 리턴합니다.
+                if (currentNode.data == data) {
+                    return true;
+                }
 
-    public boolean contains(String data) {      //재귀를 사용하여 값을 검색합니다.
-        if (value.equals(data)) return true;
-
-        boolean check;
-
-        if (children != null) {
-            for (int i = 0; i < children.size(); i++) {
-                check = children.get(i).contains(data, false);
-                if (check) return true;
+                if (currentNode.data > data) {
+                    // 찾는 value값이 노드의 value 보다 작다면, 현재 노드를 left로 변경후 다시 반복합니다.
+                    currentNode = currentNode.left;
+                } else {
+                    // 찾는 value값이 노드의 value 보다 크다면, 현재 노드를 right로 변경후 다시 반복합니다.
+                    currentNode = currentNode.right;
+                }
             }
+            return false;
         }
-        return false;
-    }
 
-    public boolean contains(String data, boolean check) {      //재귀를 사용하여 값을 검색합니다.
-        if (value.equals(data)) return true;
+  /*
+	트리의 순회에 대해 구현을 합니다.
+  지금 만드려고 하는 이 순회 메서드는 단지 순회만 하는 것이 아닌, 함수를 매개변수로 받아 콜백 함수에 값을 적용시킨 것을 순회해야 합니다.
+  전위 순회를 통해 어떻게 탐색하는지 이해를 한다면 중위와 후위 순회는 쉽게 다가올 것입니다.
+	*/
 
-        if (children != null) {
-            for (int i = 0; i < children.size(); i++) {
-                check = children.get(i).contains(data, check);
+        // 이진 탐색 트리를 전위 순회하는 메서드를 만듭니다.
+        public ArrayList<Integer> preorderTree(Node root, int depth, ArrayList<Integer> list) {    //전위 순회
+            if (root != null) {
+                list.add(root.getData());
+                preorderTree(root.getLeft(), depth + 1, list);
+                preorderTree(root.getRight(), depth + 1, list);
             }
+            return list;
         }
-        return check;
+
+        public ArrayList<Integer> inorderTree(Node root, int depth, ArrayList<Integer> list) { //중위 순회
+            if (root != null) {
+                inorderTree(root.getLeft(), depth + 1, list);
+                list.add(root.getData());
+                inorderTree(root.getRight(), depth + 1, list);
+            }
+            return list;
+
+        }
+
+        public ArrayList<Integer> postorderTree(Node root, int depth, ArrayList<Integer> list) {   //후위 순회
+            if (root != null) {
+                postorderTree(root.getLeft(), depth + 1, list);
+                postorderTree(root.getRight(), depth + 1, list);
+                list.add(root.getData());
+            }
+            return list;
+        }
     }
 }
