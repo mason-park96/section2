@@ -1,81 +1,107 @@
-package queue;
+/*
+package tree;
 
 import java.util.*;
 
-public class Solution {
+public class ImplementBST {
     // 트리를 구성하는 노드 클래스입니다.
+    // 정적 클래스로 노드를 정의해놨네.
+    //
     public static class Node {
+        // 현재 노드
         private int data;
+        // 왼쪽 자식 노드 (현재 노드보다 크기 작음)
         private Node left;
+        // 오른쪽 자식 노드 (현재 노드보다 크기 큼)
         private Node right;
 
-        /* 생성자 */
+        */
+/* 생성자 *//*
+
+        // 노드 삽입하는 생성자
         public Node(int data) {
             this.setData(data);
             setLeft(null);
             setRight(null);
         }
 
+        // 현재 노드 get
         public int getData() {
             return data;
         }
 
+        // 자식 노드 중 왼쪽 서브 트리의 노드 Get
         public Node getLeft() {
             return left;
         }
 
+        // 자식 노드 중 오른쪽 서브 트리의 노드 Get
         public Node getRight() {
             return right;
         }
 
+        // 현재 노드 값 수정
         public void setData(int data) {
             this.data = data;
         }
 
+        // 왼쪽 자식 노드 수정
         public void setLeft(Node left) {
             this.left = left;
         }
 
+        // 오른쪽 자식 노드 수정
         public void setRight(Node right) {
             this.right = right;
         }
     }
 
-    //이진 탐색 트리의 클래스입니다.
+    // 이진 탐색 트리의 클래스입니다.
+    // 정적 클래스네?
+    // 하나의 이진탐색트리를 구현하는 클래스구나.
+    // 삽입삭제탐색 등은 위에 정의된 getter setter 가져다 쓰면서 하는거고
     public static class binarySearchTree {
+
+        // 
         public Node root;
 
+        // 일단 빈 트리로 초기화하고 데이터 집어넣을때마다 Root 부터 순서대로
+        // 알맞은 위치에 데이터 넣어주는거여?
         public binarySearchTree() {
             root = null;
         }
 
-        // tree에 value를 추가합니다.
+        // tree 에 value 를 추가합니다.
         public void insert(int data) {
+            // 루트 노드가 비어있는 상태나, 중복된 데이터가 삽입됐을때 등등의 예외적인 이벤트 처리
             Node newNode = new Node(data); // 왼쪽, 오른쪽 자식 노드가 null 이며 data 의 값이 저장된 새 노드 생성
-            if (root == null) {// 루트 노드가 없을때, 즉 트리가 비어있는 상태일 때,
-                root = newNode;
+            if (root == null) {// 루트 노드가 없을때, 즉 트리가 비어있는 상태일 때
+                root = newNode; // 루트에 데이터 삽입
                 return;
             }
-            if (root.data == data) return;   //중복일때 정지
+            if (root.data == newNode.getData()) return;   //중복일때 정지
 
-            // root 노드가 비어있지 않을 경우 아래의 동작을 수행하는데
-
-            Node currentNode = root;    // 탐색을 위한 노드
+            // 2 개의 노드 인스턴스를 생성했네? 흠 ......
+            // 왜 현재 노드에 Root 노드를 넣는거지.
+            Node currentNode = root;
             Node parentNode = null;
 
             while (true) {
+                // 부모 노드에 현재 노드 넣어주고
                 parentNode = currentNode;
 
                 if (data < currentNode.getData()) { // 해당 노드보다 작을 경우
                     currentNode = currentNode.getLeft();
                     if (currentNode == null) {
-                        parentNode.setLeft(currentNode);
+                        // newNode 넣어주면 되겠네 그냥
+                        // 내가 인스턴스 생성해서 노드값으로 data 넣어주는거나 newNode 나 똑같으니까
+                        parentNode.setLeft(newNode);
                         return;
                     } else if (currentNode.data == newNode.data) return;
                 } else { // 해당 노드보다 클 경우
                     currentNode = currentNode.getRight();
                     if (currentNode == null) {
-                        parentNode.setRight(currentNode);
+                        parentNode.setRight("FILL_ME_IN");
                         return;
                     } else if (currentNode.data == newNode.data) return;
                 }
@@ -102,11 +128,13 @@ public class Solution {
             return false;
         }
 
-  /*
+  */
+/*
 	트리의 순회에 대해 구현을 합니다.
   지금 만드려고 하는 이 순회 메서드는 단지 순회만 하는 것이 아닌, 함수를 매개변수로 받아 콜백 함수에 값을 적용시킨 것을 순회해야 합니다.
   전위 순회를 통해 어떻게 탐색하는지 이해를 한다면 중위와 후위 순회는 쉽게 다가올 것입니다.
-	*/
+	*//*
+
 
         // 이진 탐색 트리를 전위 순회하는 메서드를 만듭니다.
         public ArrayList<Integer> preorderTree(Node root, int depth, ArrayList<Integer> list) {    //전위 순회
@@ -119,22 +147,11 @@ public class Solution {
         }
 
         public ArrayList<Integer> inorderTree(Node root, int depth, ArrayList<Integer> list) { //중위 순회
-            if (root != null) {
-                inorderTree(root.getLeft(), depth + 1, list);
-                list.add(root.getData());
-                inorderTree(root.getRight(), depth + 1, list);
-            }
-            return list;
-
+            //TODO: 전위 순회를 바탕으로 중위 순회를 구현하세요.
         }
 
         public ArrayList<Integer> postorderTree(Node root, int depth, ArrayList<Integer> list) {   //후위 순회
-            if (root != null) {
-                postorderTree(root.getLeft(), depth + 1, list);
-                postorderTree(root.getRight(), depth + 1, list);
-                list.add(root.getData());
-            }
-            return list;
+            //TODO: 전위 순회를 바탕으로 후위 순회를 구현하세요.
         }
     }
-}
+}*/
