@@ -10,6 +10,7 @@ public class ImplementTree {
     private String value;
     // 자식 노드. 다자 트리를 상정하고 공간을 미리 할당해놓는 느낌. 자리를 마련해놓는 느낌
     // 마련해놓은 자리 한 칸당 하나의 자식 노드가 삽입됨
+    // 이건 2진 트리가 아니라 다자트리 아냐?
     private ArrayList<ImplementTree> children;
 
     public ImplementTree() {	//전달인자가 없을 경우의 생성자
@@ -87,5 +88,25 @@ public class ImplementTree {
             }
         }
         return check;
+    }
+
+    // toString 메서드 오버라이드
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Value: ").append(this.value).append(", Childern: [");
+        if(children != null) {
+            for(int i = 0; i < children.size(); i++) {
+                // ArrayList<ImplementTree> children 의 i 번째 요소의 value 를 sb 에 삽입
+                sb.append(children.get(i).getValue());
+                if (i < children.size() - 1) {
+                    sb.append(", ");
+                }
+            }
+        }
+        // 모든 children 의 요소를 다 sb 에 삽입한 후에 닫아주기
+        sb.append("]");
+        // StringBuilder 는 toString() 메서드를 돌려줘야 sout 으로 출력 가능한가? 가 아니라 그 동작을 출력시 생략시키기 위해서구나 섬세함 굿
+        return sb.toString();
     }
 }
