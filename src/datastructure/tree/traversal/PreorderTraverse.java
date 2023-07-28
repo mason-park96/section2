@@ -1,4 +1,4 @@
-package tree.traversal;
+package datastructure.tree.traversal;
 
 // 이진 탐색 트리 전위 순회 알고리즘
 // Date: 2023-07-27
@@ -9,7 +9,7 @@ package tree.traversal;
 때문에 대표적으로 전위, 중위, 후위 순회 알고리즘의 3 가지 탐색 방식이 있다.
 아래에서는 전위 순회 알고리즘 예시와 그 설명을 작성하겠다.*/
 
-import tree.BinaryTree;
+import datastructure.tree.BinaryTree;
 import java.util.ArrayList;
 
 public class PreorderTraverse {
@@ -52,6 +52,7 @@ public class PreorderTraverse {
     // 중요한건 매개변수로 받은 list 에 탐색한 노드를 저장해주니까
     // 몇 번 return 하든 알빠노? 아무튼 난 저장하니까 상관없다 이거야
     // 그냥 탈출조건이면, return; 으로 코드를 바꿔도 전혀 상관이 없겠네.
+    // return 타입 명시된것 때문에 안되네. 근데 애초에 void 로 해도 상관없잖아.
     public ArrayList<String> preOrder(BinaryTree node, ArrayList<String> list) {
         if (node != null) {
             list.add(node.getData());

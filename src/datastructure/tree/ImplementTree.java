@@ -2,7 +2,7 @@
 코플릿 자료구조 6번 문제
 */
 
-package tree;
+package datastructure.tree;
 import java.util.*;
 
 public class ImplementTree {

@@ -1,4 +1,4 @@
-package tree;
+package datastructure.tree;
 
 public class BinaryTree {
     private String data;

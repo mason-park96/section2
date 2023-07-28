@@ -1,4 +1,4 @@
-package stack;/*
+package datastructure.stack;/*
 스택을 이용하여 사칙연산 계산기를 구현하는 문제이다.
 사용자로부터 수식 전체를 입력받아서 계산을 진행한다.
 
@@ -44,7 +44,7 @@ public class Calculator {
                     i++;
                 }
                 // 이제 하나의 char type 숫자를 온전히 double type 숫자로 형변환한 것이다.
-                // 이 숫자를 stack 에 추가
+                // 이 숫자를 datastructure.stack 에 추가
                 numbers.push(num);
             } else if (element == '(') {
                 operators.push(element);
@@ -64,7 +64,7 @@ public class Calculator {
                 operators.pop();
             } else if (element == '+' || element == '-' || element == '*' || element == '/') {
                 // 이건 i 번째 element 가 괄호 없는 일반적인 연산자일 경우인데
-                // 이때는 우선순위 더 높은 연산자가 operators stack 에 저장되어 있는지 확인하고
+                // 이때는 우선순위 더 높은 연산자가 operators datastructure.stack 에 저장되어 있는지 확인하고
                 // 저장되어 있으면 연산 해버림.
                 // 우선순위 더 높은 연산을 모두 찾고 모두 연산하고 나면 (그럼 다 삭제됨)
                 // 연산자를 다 pop() 하고, 연산결과 (result)를 다 push()하고
@@ -73,13 +73,13 @@ public class Calculator {
                     numbers.push(result);
                 }
                 // 우선순위가 더 높은 연산자에 대한 연산을 다 끝낸 다음에, 비로소 현재 i 번째 element 가 가지고 있는
-                // 연산자를 operators stack 에 저장함
+                // 연산자를 operators datastructure.stack 에 저장함
                 operators.push(element);
             }
         }
         // 이렇게 반복문을 끝낸 후, 모든 괄호 연산과 우선순위가 높은 연산을 다 끝내고 나면
         // 남아있는 연산자와 피연산자에 대한 연산을 한다.
-        // 언제까지? operators stack 이 다 없어질때까지
+        // 언제까지? operators datastructure.stack 이 다 없어질때까지
         while (!operators.isEmpty()) {
             double result = applyOperation(operators.pop(), numbers.pop(), numbers.pop());
             numbers.push(result);

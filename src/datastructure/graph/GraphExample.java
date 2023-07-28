@@ -1,6 +1,4 @@
-package graph;
-
-import org.w3c.dom.ls.LSOutput;
+package datastructure.graph;
 
 import java.util.ArrayList;
 import java.util.Arrays;

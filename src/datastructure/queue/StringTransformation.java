@@ -1,4 +1,4 @@
-package queue;
+package datastructure.queue;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -14,14 +14,14 @@ public class StringTransformation {
             queue.offer(letter);
         }
 
-        // queue 의 모든 요소를 다 출력할 때 까지 (빈 queue가 될 때 까지) 반복
+        // datastructure.queue 의 모든 요소를 다 출력할 때 까지 (빈 queue가 될 때 까지) 반복
         while (!queue.isEmpty()) {
             output.append(queue.poll());
-            // 위에서 append(queue.poll()) 함으로 인하여 queue 가 빈 queue 가 된 상태인데
-            // poll() 메서드로 빈 queue 에 접근해서 OutOfMemoryError 에러 발생한다고?
+            // 위에서 append(datastructure.queue.poll()) 함으로 인하여 datastructure.queue 가 빈 datastructure.queue 가 된 상태인데
+            // poll() 메서드로 빈 datastructure.queue 에 접근해서 OutOfMemoryError 에러 발생한다고?
             // null 을 반환해야 할텐데
-            // queue 가 비어있을 경우 queue.poll(); 하면 null 을 return 하는데 이때 이 null을
-            // 다시 queue 에 넣어주니까 queue.size() 가 계속 0에서 1로 바뀌는구나.
+            // datastructure.queue 가 비어있을 경우 datastructure.queue.poll(); 하면 null 을 return 하는데 이때 이 null을
+            // 다시 datastructure.queue 에 넣어주니까 datastructure.queue.size() 가 계속 0에서 1로 바뀌는구나.
             // 그래서 무한 루프 발생하였구나.
             if(!queue.isEmpty()) {
                 // 아래의 코드 한 줄 자체가 무한루프를 야기하는 코드이기 때문에

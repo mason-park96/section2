@@ -1,5 +1,5 @@
 /*
-package tree;
+package datastructure.tree;
 
 import java.util.*;
 
@@ -71,7 +71,7 @@ public class ImplementBST {
             root = null;
         }
 
-        // tree 에 value 를 추가합니다.
+        // datastructure.tree 에 value 를 추가합니다.
         public void insert(int data) {
             // 루트 노드가 비어있는 상태나, 중복된 데이터가 삽입됐을때 등등의 예외적인 이벤트 처리
             Node newNode = new Node(data); // 왼쪽, 오른쪽 자식 노드가 null 이며 data 의 값이 저장된 새 노드 생성

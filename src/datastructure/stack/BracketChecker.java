@@ -1,4 +1,4 @@
-package stack;
+package datastructure.stack;
 
 import java.util.Stack;
 
@@ -22,7 +22,7 @@ public class BracketChecker {
         // 스택이 비었을 경우 오른쪽 괄호가 입력되면 안된다.
         // 만약 오른쪽 괄호가 들어왔다면 그 전에 입력된 괄호는 동일한 종류의 왼쪽 괄호여야 한다.
         // 왼쪽 괄호는 언제든지 추가되어도 상관없다.
-        // 전체 수식에 대하여 탐색하여야 하며, String formula 를 Stack stack 에 넣어줘야 한다.
+        // 전체 수식에 대하여 탐색하여야 하며, String formula 를 Stack datastructure.stack 에 넣어줘야 한다.
 
         for (int i = 0; i < formula.length(); i++) {
             // 수식에서 괄호 부호만 추출한다.

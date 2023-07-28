@@ -1,12 +1,12 @@
-package graph;
+package datastructure.graph;
 
 public class KoplitDataStructure07 {
-    // 이 클래스는 멤버 변수로 graph 를 가지네
-    // graph 를 생성하는 것이 이 클래스의 목적이구나?
+    // 이 클래스는 멤버 변수로 datastructure.graph 를 가지네
+    // datastructure.graph 를 생성하는 것이 이 클래스의 목적이구나?
     private int[][] graph;
 
-    // 클래스 내에서만 int[][] graph 에 접근할 수 있으니까 Getter Setter 선언하는거지.
-    // vertex 의 갯수 == size 로 2차원 배열을 생성해서 graph 에 할당하는구나
+    // 클래스 내에서만 int[][] datastructure.graph 에 접근할 수 있으니까 Getter Setter 선언하는거지.
+    // vertex 의 갯수 == size 로 2차원 배열을 생성해서 datastructure.graph 에 할당하는구나
     // 그 후에 모든 원소를 0 으로 초기화하네.
     public void setGraph(int size) {
         graph = new int[size][size];
