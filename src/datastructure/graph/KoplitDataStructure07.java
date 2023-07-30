@@ -20,17 +20,20 @@ public class KoplitDataStructure07 {
     public int[][] getGraph() {
         return graph;
     }
+    // 간선 추가하는 메서드
     public void addEdge(int from, int to) {
         if(from >= graph.length || to >= graph.length) return;  // 잘못된 값을 입력받으면 함수를 종료하는구나.
         graph[from][to] = 1;    // 정상적인 값을 입력받으면, 해당 두 간선이 연결돼있다는 뜻에서 원소에 1을 저장하는구나?
     }
 
+    // 두 정점이 서로 연결되어 있는지 여부를 반환하는 함수
     public boolean hasEdge(int from, int to) {
         if(from >= graph.length || to >= graph.length) return false;    // vertex 가 아닌 다른 숫자를 입력받을 경우 false 리턴하고
         else if(graph[from][to] == 1) return true;    // 정상적인 두 vertex 가 연결되어 있는지 물어보면 정상 처리
         else return false;  // 1 아니면 연결 안되어있으니까 false 리턴
     }
-
+    
+    // 두 정점을 연결하는 간선을 삭제하는 메서드
     public void removeEdge(int from, int to) {
         // 정상 입력 아니면 컷. 아 이게 왜 이렇게 한 땀 한 땀 하나 했더니
         // 잘못된 영역을 참조한다고 에러 뜨겠네 이거 안하면 ㅇㅋㅇㅋ
