@@ -6,6 +6,8 @@ converter 네
 Encoder 라고 봐도될듯
 */
 
+import java.util.Arrays;
+
 public class DataStructureNum10 {
 
     public static void main(String[] args) {
@@ -15,7 +17,7 @@ public class DataStructureNum10 {
                 {1, 3, 0},
                 {2, 1, 0},
         });
-
+        System.out.println(Arrays.deepToString(output1));
 
     }
     public static int[][] createMatrix(int[][] edges) {
@@ -32,6 +34,8 @@ public class DataStructureNum10 {
                 }
             }
         }
+        sizeOfGraph++;
+
         // 이제 사이즈 알았으니까 graph 생성
         int[][] graph = new int[sizeOfGraph][sizeOfGraph];
 
