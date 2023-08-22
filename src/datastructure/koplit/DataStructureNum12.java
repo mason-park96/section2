@@ -1,7 +1,10 @@
 /*
 방향이 없는 간선들의 목록이 주어질 때, 연결된 정점의 컴포넌트(그룹들)가 몇 개인지 반환하는 함수를 작성하는 문제
-
+정점끼리 연결이 돼어있는지 판별
+정점끼리 연결된 덩어리를 판별
+정점끼리 연결된 덩어리가 몇 개 인지를 판별
 */
+
 package datastructure.koplit;
 
 import java.util.Arrays;
@@ -12,7 +15,8 @@ import java.util.Queue;
 public class DataStructureNum12 {
     //만약 길이 존재하고, 방문하지 않았다면
     public int connectedVertices(int[][] edges) {
-
+        // 상수형 배열 bigger 을 선언했어. 왜지?
+        // 변하지 않는 값이잖아.
         final int[] bigger = {0};
 
         // 최대 버텍스를 찾습니다.
@@ -94,4 +98,3 @@ public class DataStructureNum12 {
         return visited;
     }
 }
-
